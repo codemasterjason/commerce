@@ -12,7 +12,7 @@
         <module>Core-Common</module>
         <module>Core-Service</module>
         <module>Core-Domain</module>
-        <module>API-Test</module>
+        <module>Web-Test</module>
     </modules>
     <packaging>pom</packaging>
     <name>Commerce Project</name>
