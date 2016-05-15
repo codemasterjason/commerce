@@ -66,7 +66,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.lifeisquest.ApiTestApplication</mainClass>
+                    <mainClass>com.lifeisquest.WebTestApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>
