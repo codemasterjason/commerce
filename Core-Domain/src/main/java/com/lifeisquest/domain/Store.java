@@ -1,5 +1,6 @@
 package com.lifeisquest.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Column;
@@ -22,19 +23,8 @@ import lombok.Data;
 @Entity
 @Table(name="store")
 @Data
-public class Store {
-  /*
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `product_id` int(10) unsigned NOT NULL,
-  `quantity` int(10) unsigned NOT NULL,
-  `discount` decimal(10,0) unsigned NOT NULL COMMENT '할인가',
-  `hide` char(1) NOT NULL DEFAULT 'N',
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `fk_store_product1_idx` (`product_id`),
-  CONSTRAINT `fk_store_product1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-  */
+public class Store implements Serializable {
+  private static final long serialVersionUID = 1L;
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name ="ID")
@@ -64,14 +54,6 @@ public class Store {
   @ManyToOne
   @JoinColumn(name = "product_id")
   private Product product;
-
-  public void setProduct(Product product){
-    this.product = product;
-
-    if(!product.getStores().contains(this)){
-      product.getStores().add(this);
-    }
-  }
 
 
 }

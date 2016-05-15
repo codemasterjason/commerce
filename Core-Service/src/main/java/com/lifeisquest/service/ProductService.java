@@ -4,8 +4,6 @@ import com.lifeisquest.domain.Product;
 import com.lifeisquest.repository.ProductRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,32 +19,28 @@ import java.util.List;
 public class ProductService {
 
   @Autowired
-  ProductRepository productRepository;
+  ProductRepository productRepo;
 
 
   public Product getProduct(Long id) {
 
-    return productRepository.findOne(id);
+    return productRepo.findOne(id);
   }
 
 
   public void save(List<Product> products){
     for(Product product : products){
-      productRepository.save(product);
+      productRepo.save(product);
     }
   }
 
 
   public void save(Product product) {
-    productRepository.save(product);
+    productRepo.save(product);
 
   }
 
 
-  public Page<Product> getAllProductPerPage(Integer page, Integer size) {
-    Page pageOfProducts = productRepository.findAll(new PageRequest(page, size));
 
-    return pageOfProducts;
-  }
 
 }
