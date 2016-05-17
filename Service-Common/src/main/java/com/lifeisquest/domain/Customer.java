@@ -1,10 +1,7 @@
 package com.lifeisquest.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import java.io.Serializable;
-import java.util.Date;
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,33 +16,32 @@ import lombok.Data;
 /**
  * @version : 1.0
  * @author: : patrian
- * @since : 2016. 5. 10.
+ * @since : 2016. 5. 17.
  */
 @Entity
-@Table(name="product")
-public @Data class Product implements Serializable {
-  private static final long serialVersionUID = 1L;
+@Data
+@Table(name="customer")
+public class Customer {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name ="ID")
   private long id;
 
   @NotNull
-  @Column(name ="name")
-  private String name;
+  @Column(name ="name_first")
+  private String name_first;
 
   @NotNull
-  @JsonBackReference
-  @Column(name="description")
-  private String description;
+  @Column(name ="name_last")
+  private String name_last;
 
   @NotNull
-  @Column(name="price")
-  private int price;
+  @Column(name ="email")
+  private String email;
 
   @NotNull
-  @Column(name="hide")
-  private String hide;
+  @Column(name ="password")
+  private String password;
 
   @NotNull
   @Column(name="created_at")
@@ -55,13 +51,13 @@ public @Data class Product implements Serializable {
   @Column(name="updated_at")
   private Date updateTime;
 
-  public Product(String name,Object description, int price, String hide){
-    this.name = name;
-    this.description = description.toString();
-    this.price = price;
-    this.hide = hide;
+
+  public Customer(String name_first, String name_last, String email, String password){
+    this.name_first = name_first;
+    this.name_last = name_last;
+    this.email = email;
+    this.password = password;
     this.createTime = Calendar.getInstance().getTime();
     this.updateTime = Calendar.getInstance().getTime();
   }
-
 }

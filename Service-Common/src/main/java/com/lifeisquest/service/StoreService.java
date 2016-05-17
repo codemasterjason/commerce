@@ -1,5 +1,6 @@
 package com.lifeisquest.service;
 
+import com.lifeisquest.domain.Product;
 import com.lifeisquest.domain.Store;
 import com.lifeisquest.repository.StoreRepository;
 
@@ -18,9 +19,25 @@ import java.util.Map;
  */
 
 @Service
-public class StoreServce {
+public class StoreService {
   @Autowired
   StoreRepository storeRepo;
+
+  /*
+   save 1 item
+   */
+  public void save(List<Store> stores){
+    for(Store item : stores){
+      storeRepo.save(item);
+    }
+  }
+
+  /*
+   save Store list
+   */
+  public void save(Store store){
+    storeRepo.save(store);
+  }
 
   /*
    find one product each productId

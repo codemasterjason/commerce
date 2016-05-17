@@ -1,8 +1,7 @@
 package com.lifeisquest.domain;
 
-import java.io.Serializable;
-import java.util.Date;
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,8 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
@@ -23,33 +20,31 @@ import lombok.Data;
 /**
  * @version : 1.0
  * @author: : patrian
- * @since : 2016. 5. 13.
+ * @since : 2016. 5. 17.
  */
 @Entity
-@Table(name="store")
 @Data
-public class Store implements Serializable {
-  private static final long serialVersionUID = 1L;
+@Table(name="order")
+public class Order {
+
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name ="ID")
   private long id;
-
 
   @NotNull
   @Column(name ="quantity")
   private int quantity;
 
   @NotNull
-  @Column(name ="discount")
-  private int disCount;
+  @Column(name ="cancel")
+  private String cancel;
 
   @NotNull
   @Column(name ="hide")
   private String hide;
 
   @NotNull
-  // default : @Temporal(TemporalType.TIMESTAMP)
   @Column(name="created_at")
   private Date createTime;
 
@@ -58,14 +53,19 @@ public class Store implements Serializable {
   private Date updateTime;
 
   @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
-  @JoinColumn(name = "product_id")
-  private Product product;
+  @JoinColumn(name = "store_id")
+  private Store store;
 
-  public Store(int quantity,int disCount, String hide, Product product){
+  @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
+  @JoinColumn(name = "customer_id")
+  private Customer customer;
+
+  public Order(int quantity,String cancel, String hide, Store store, Customer customer){
     this.quantity = quantity;
-    this.disCount = disCount;
+    this.cancel = cancel;
     this.hide = hide;
-    this.product = product;
+    this.store = store;
+    this.customer = customer;
     this.createTime = Calendar.getInstance().getTime();
     this.updateTime = Calendar.getInstance().getTime();
   }
