@@ -14,10 +14,10 @@ import org.springframework.context.annotation.Configuration;
 @EnableAutoConfiguration
 @ComponentScan
 @EnableConfigurationProperties
-public class ApiApplication {
+public class ApiCommonApplication {
 
   public static void main(String[] args) {
-    SpringApplication app = new SpringApplication(ApiApplication.class);
+    SpringApplication app = new SpringApplication(ApiCommonApplication.class);
     app.run(args);
   }
 }

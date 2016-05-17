@@ -19,7 +19,7 @@
         </dependency>
         <dependency>
             <groupId>com.lifeisquest</groupId>
-            <artifactId>Core-Service</artifactId>
+            <artifactId>Service-Common</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
@@ -30,7 +30,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.lifeisquest.ApiApplication</mainClass>
+                    <mainClass>com.lifeisquest.ApiCommonApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>
