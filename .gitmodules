@@ -1,3 +1,4 @@
 [submodule "DB-Samples"]
 	path = DB-Samples
-    url = https://github.com/lifeisquest/DB-Samples.git
+	url = https://github.com/lifeisquest/DB-Samples.git
+	branch = master
