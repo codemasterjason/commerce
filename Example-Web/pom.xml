@@ -19,7 +19,7 @@
         </dependency>
         <dependency>
             <groupId>com.lifeisquest</groupId>
-            <artifactId>Core-Service</artifactId>
+            <artifactId>Service-Common</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
