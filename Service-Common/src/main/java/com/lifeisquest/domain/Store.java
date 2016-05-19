@@ -61,6 +61,9 @@ public class Store implements Serializable {
   @JoinColumn(name = "product_id")
   private Product product;
 
+  public Store(){
+
+  }
   public Store(int quantity,int disCount, String hide, Product product){
     this.quantity = quantity;
     this.disCount = disCount;

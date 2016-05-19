@@ -55,6 +55,9 @@ public @Data class Product implements Serializable {
   @Column(name="updated_at")
   private Date updateTime;
 
+  public Product(){
+
+  }
   public Product(String name,Object description, int price, String hide){
     this.name = name;
     this.description = description.toString();

@@ -1,5 +1,7 @@
 package com.lifeisquest.domain;
 
+import org.hibernate.usertype.CompositeUserType;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -51,7 +53,9 @@ public class Customer {
   @Column(name="updated_at")
   private Date updateTime;
 
+  public Customer(){
 
+  }
   public Customer(String name_first, String name_last, String email, String password){
     this.name_first = name_first;
     this.name_last = name_last;

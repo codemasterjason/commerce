@@ -60,6 +60,9 @@ public class Order {
   @JoinColumn(name = "customer_id")
   private Customer customer;
 
+  public Order(){
+
+  }
   public Order(int quantity,String cancel, String hide, Store store, Customer customer){
     this.quantity = quantity;
     this.cancel = cancel;
