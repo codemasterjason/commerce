@@ -11,9 +11,9 @@ import org.springframework.context.annotation.Configuration;
  * @since v1.0.0
  */
 @Configuration
+@EnableConfigurationProperties
 @EnableAutoConfiguration
 @ComponentScan
-@EnableConfigurationProperties
 public class DataAccessApplication {
 
   public static void main(String[] args) {

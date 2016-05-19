@@ -13,9 +13,17 @@
 
     <properties>
         <mysql-connector-java.version>6.0.2</mysql-connector-java.version>
+        <guava.version>19.0</guava.version>
+        <jackson-datatype-hibernate.version>2.7.4</jackson-datatype-hibernate.version>
     </properties>
 
     <dependencies>
+        <!-- Own Module -->
+        <dependency>
+            <groupId>com.lifeisquest</groupId>
+            <artifactId>Core-Common</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
         <!-- Spring Boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -26,6 +34,18 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql-connector-java.version}</version>
+        </dependency>
+        <!-- Guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+        <!-- Jack for hibernate -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-hibernate4</artifactId>
+            <version>${jackson-datatype-hibernate.version}</version>
         </dependency>
     </dependencies>
 </project>
