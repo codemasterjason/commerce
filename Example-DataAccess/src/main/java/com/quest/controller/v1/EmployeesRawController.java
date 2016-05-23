@@ -1,9 +1,7 @@
 package com.quest.controller.v1;
 
-import com.google.common.collect.Lists;
-
 import com.quest.annotation.Get;
-import com.quest.domain.DeptEmp;
+import com.quest.annotation.Post;
 import com.quest.domain.Employees;
 import com.quest.model.RowBounds;
 import com.quest.service.EmployeesService;
@@ -18,10 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Optional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
-import javax.persistence.Query;
 import javax.validation.Valid;
 
 /**
@@ -29,7 +23,7 @@ import javax.validation.Valid;
  * @since v1.0.0
  */
 @RestController
-@RequestMapping("v1/employees")
+@RequestMapping("api/v1/employees")
 public class EmployeesRawController {
 
   @Autowired
@@ -47,8 +41,15 @@ public class EmployeesRawController {
   public ResponseObj getEmployees(@Valid RowBounds rowBounds) {
     Optional<List<Employees>> employees = employeesService.getEmployees(rowBounds);
     if (!employees.isPresent()) {
-      return responseFactory.get(MessageCode.FAIL);
+      return responseFactory.get(MessageCode.DAO_FAIL);
     }
     return responseFactory.get(MessageCode.SUCCESS, employees.get());
+  }
+
+  @Post("")
+  public ResponseObj addEmployees(@Valid Employees employees) {
+    employeesService.addEmployees(employees);
+
+    return responseFactory.get(MessageCode.SUCCESS);
   }
 }

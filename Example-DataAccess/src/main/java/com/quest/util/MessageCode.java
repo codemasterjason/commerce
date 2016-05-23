@@ -7,7 +7,8 @@ package com.quest.util;
 public enum MessageCode {
 
   SUCCESS(1),
-  FAIL(-1);
+  FAIL(-1),
+  DAO_FAIL(-2);
 
   private final int code;
 

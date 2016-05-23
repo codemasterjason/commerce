@@ -13,4 +13,6 @@ import java.util.Optional;
 public interface EmployeesService {
 
   Optional<List<Employees>> getEmployees(RowBounds rowBounds);
+
+  void addEmployees(Employees employees);
 }

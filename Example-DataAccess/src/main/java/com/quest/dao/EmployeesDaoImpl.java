@@ -30,4 +30,9 @@ public class EmployeesDaoImpl implements EmployeesDao {
     Optional<List<Employees>> employees = Optional.of(query.getResultList());
     return employees;
   }
+
+  @Override
+  public void save(Employees employees) {
+    em.persist(employees);
+  }
 }
