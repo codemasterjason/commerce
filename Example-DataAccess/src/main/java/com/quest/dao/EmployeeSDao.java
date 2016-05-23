@@ -15,4 +15,6 @@ public interface EmployeesDao {
   Optional<List<Employees>> findEmployees(RowBounds rowBounds);
 
   void save(Employees employees);
+
+  Optional<Employees> merge(Employees employees);
 }

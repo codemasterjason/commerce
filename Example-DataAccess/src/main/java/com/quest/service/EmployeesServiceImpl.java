@@ -31,4 +31,9 @@ public class EmployeesServiceImpl implements EmployeesService {
   public void addEmployees(Employees employees) {
     employeesDao.save(employees);
   }
+
+  @Override
+  public Optional<Employees> modifyEmployees(Employees employees) {
+    return employeesDao.merge(employees);
+  }
 }

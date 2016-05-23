@@ -35,4 +35,9 @@ public class EmployeesDaoImpl implements EmployeesDao {
   public void save(Employees employees) {
     em.persist(employees);
   }
+
+  @Override
+  public Optional<Employees> merge(Employees employees) {
+    return Optional.of(em.merge(employees));
+  }
 }

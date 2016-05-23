@@ -2,6 +2,7 @@ package com.quest.controller.v1;
 
 import com.quest.annotation.Get;
 import com.quest.annotation.Post;
+import com.quest.annotation.Put;
 import com.quest.domain.Employees;
 import com.quest.model.RowBounds;
 import com.quest.service.EmployeesService;
@@ -9,6 +10,7 @@ import com.quest.util.MessageCode;
 import com.quest.util.ResponseFactory;
 import com.quest.util.ResponseObj;
 
+import org.aspectj.bridge.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,7 +51,17 @@ public class EmployeesRawController {
   @Post("")
   public ResponseObj addEmployees(@Valid Employees employees) {
     employeesService.addEmployees(employees);
-
     return responseFactory.get(MessageCode.SUCCESS);
   }
+
+  @Put("")
+  public ResponseObj modifyEmployees(@Valid Employees employees) {
+    Optional<Employees> employeesReturn = employeesService.modifyEmployees(employees);
+    if (!employeesReturn.isPresent()) {
+      return responseFactory.get(MessageCode.DAO_FAIL);
+    }
+    return responseFactory.get(MessageCode.SUCCESS, employeesReturn.get());
+  }
+
+
 }
