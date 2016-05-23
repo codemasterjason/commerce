@@ -1,5 +1,6 @@
 package com.quest.controller.v1;
 
+import com.quest.annotation.Delete;
 import com.quest.annotation.Get;
 import com.quest.annotation.Post;
 import com.quest.annotation.Put;
@@ -10,8 +11,8 @@ import com.quest.util.MessageCode;
 import com.quest.util.ResponseFactory;
 import com.quest.util.ResponseObj;
 
-import org.aspectj.bridge.Message;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -48,6 +49,15 @@ public class EmployeesRawController {
     return responseFactory.get(MessageCode.SUCCESS, employees.get());
   }
 
+  @Get("/{empNo}")
+  public ResponseObj getEmployees(@PathVariable Integer empNo) {
+    Optional<Employees> employees = employeesService.getEmployees(empNo);
+    if (!employees.isPresent()) {
+      return responseFactory.get(MessageCode.DAO_FAIL);
+    }
+    return responseFactory.get(MessageCode.SUCCESS, employees.get());
+  }
+
   @Post("")
   public ResponseObj addEmployees(@Valid Employees employees) {
     employeesService.addEmployees(employees);
@@ -63,5 +73,13 @@ public class EmployeesRawController {
     return responseFactory.get(MessageCode.SUCCESS, employeesReturn.get());
   }
 
-
+  @Delete("/{empNo}")
+  public ResponseObj deleteEmployees(@PathVariable Integer empNo) {
+    Optional<Employees> employees = employeesService.getEmployees(empNo);
+    if (!employees.isPresent()) {
+      return responseFactory.get(MessageCode.DAO_FAIL);
+    }
+    employeesService.removeEmployees(employees.get());
+    return responseFactory.get(MessageCode.SUCCESS);
+  }
 }

@@ -32,6 +32,12 @@ public class EmployeesDaoImpl implements EmployeesDao {
   }
 
   @Override
+  public Optional<Employees> findEmployeesByEmpNo(Integer empNo) {
+    Optional<Employees> employees = Optional.ofNullable(em.find(Employees.class, empNo));
+    return employees;
+  }
+
+  @Override
   public void save(Employees employees) {
     em.persist(employees);
   }
@@ -39,5 +45,10 @@ public class EmployeesDaoImpl implements EmployeesDao {
   @Override
   public Optional<Employees> merge(Employees employees) {
     return Optional.of(em.merge(employees));
+  }
+
+  @Override
+  public void delete(Employees employees) {
+    em.remove(employees);
   }
 }

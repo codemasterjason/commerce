@@ -14,7 +14,11 @@ public interface EmployeesService {
 
   Optional<List<Employees>> getEmployees(RowBounds rowBounds);
 
+  Optional<Employees> getEmployees(Integer empNo);
+
   void addEmployees(Employees employees);
 
   Optional<Employees> modifyEmployees(Employees employees);
+
+  void removeEmployees(Employees employees);
 }

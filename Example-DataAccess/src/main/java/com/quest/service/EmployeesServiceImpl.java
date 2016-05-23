@@ -28,6 +28,11 @@ public class EmployeesServiceImpl implements EmployeesService {
   }
 
   @Override
+  public Optional<Employees> getEmployees(Integer empNo) {
+    return employeesDao.findEmployeesByEmpNo(empNo);
+  }
+
+  @Override
   public void addEmployees(Employees employees) {
     employeesDao.save(employees);
   }
@@ -35,5 +40,10 @@ public class EmployeesServiceImpl implements EmployeesService {
   @Override
   public Optional<Employees> modifyEmployees(Employees employees) {
     return employeesDao.merge(employees);
+  }
+
+  @Override
+  public void removeEmployees(Employees employees) {
+    employeesDao.delete(employees);
   }
 }
