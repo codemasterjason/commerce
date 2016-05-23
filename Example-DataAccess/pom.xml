@@ -18,12 +18,6 @@
     </properties>
 
     <dependencies>
-        <!-- Own Module -->
-        <dependency>
-            <groupId>com.lifeisquest</groupId>
-            <artifactId>Core-Common</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
         <!-- Spring Boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
