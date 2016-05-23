@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.1">
+
+    <persistence-unit name="EmployeesPU">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>com.quest.domain.Departments</class>
+        <class>com.quest.domain.DeptEmp</class>
+        <class>com.quest.domain.DeptManager</class>
+        <class>com.quest.domain.Employees</class>
+        <class>com.quest.domain.Salaries</class>
+        <class>com.quest.domain.Titles</class>
+        <properties>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hbm2ddl.auto" value="update"/>
+            <property name="hibernate.connection.url"
+                      value="jdbc:mysql://localhost:3306/employees"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+            <property name="hibernate.connection.username"/>
+            <property name="hibernate.connection.password"/>
+        </properties>
+    </persistence-unit>
+</persistence>

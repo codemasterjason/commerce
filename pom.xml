@@ -12,6 +12,7 @@
         <module>Core-Common</module>
         <module>Service-Common</module>
         <module>Example-Web</module>
+        <module>Example-DataAccess</module>
     </modules>
     <packaging>pom</packaging>
     <name>Commerce Project</name>
