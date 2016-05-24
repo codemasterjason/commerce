@@ -17,7 +17,7 @@ import java.util.Optional;
  */
 @Service
 @Transactional
-public class EmployeesServiceImpl implements EmployeesService {
+public class EmployeesRawServiceImpl implements EmployeesRawService {
 
   @Autowired
   EmployeesDao employeesDao;

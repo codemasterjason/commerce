@@ -10,7 +10,7 @@ import java.util.Optional;
  * @author Jason Park
  * @since v1.0.0
  */
-public interface EmployeesService {
+public interface EmployeesRawService {
 
   Optional<List<Employees>> getEmployees(RowBounds rowBounds);
 
