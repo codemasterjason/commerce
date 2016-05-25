@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -23,5 +24,10 @@ public class EmployeesServiceImpl implements EmployeesService {
   @Override
   public Optional<Page<Employees>> getEmployees(Pageable pageable) {
     return Optional.ofNullable(employeesRepository.findAll(pageable));
+  }
+
+  @Override
+  public void addEmployees(List<Employees> employees) {
+    employeesRepository.save(employees);
   }
 }

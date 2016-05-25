@@ -6,6 +6,8 @@ import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -15,7 +17,8 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class Employees {
-  private int empNo;
+
+  private Integer empNo;
   private Date birthDate;
   private String firstName;
   private String lastName;
@@ -28,11 +31,12 @@ public class Employees {
 
   @Id
   @Column(name = "emp_no", nullable = false)
-  public int getEmpNo() {
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  public Integer getEmpNo() {
     return empNo;
   }
 
-  public void setEmpNo(int empNo) {
+  public void setEmpNo(Integer empNo) {
     this.empNo = empNo;
   }
 
