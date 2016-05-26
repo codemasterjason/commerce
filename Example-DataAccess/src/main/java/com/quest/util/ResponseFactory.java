@@ -1,5 +1,7 @@
 package com.quest.util;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 /**
@@ -9,11 +11,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class ResponseFactory {
 
-  public ResponseObj get(MessageCode messageCode, Object object) {
-    return new ResponseObj(messageCode, object);
+  public ResponseEntity get(MessageCode messageCode, Object object, HttpStatus httpStatus) {
+    return new ResponseEntity<>(new ResponseObj(messageCode, object), httpStatus);
   }
 
-  public ResponseObj get(MessageCode messageCode) {
-    return new ResponseObj(messageCode.getCode(), messageCode.toString(), null);
+  public ResponseEntity get(MessageCode messageCode, Object object) {
+    return new ResponseEntity<>(new ResponseObj(messageCode, object), HttpStatus.OK);
+  }
+
+  public ResponseEntity get(MessageCode messageCode, HttpStatus httpStatus) {
+    return new ResponseEntity<>(new ResponseObj(messageCode.getCode(), messageCode.toString(), null), httpStatus);
+  }
+
+  public ResponseEntity get(MessageCode messageCode) {
+    return new ResponseEntity<>(new ResponseObj(messageCode.getCode(), messageCode.toString(), null), HttpStatus.OK);
   }
 }

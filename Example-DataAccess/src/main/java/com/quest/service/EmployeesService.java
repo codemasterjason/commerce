@@ -1,7 +1,9 @@
 package com.quest.service;
 
 import com.quest.domain.Employees;
-import com.quest.model.RowBounds;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,13 +14,11 @@ import java.util.Optional;
  */
 public interface EmployeesService {
 
-  Optional<List<Employees>> getEmployees(RowBounds rowBounds);
+  Optional<Page<Employees>> getEmployees(Pageable pageable);
 
-  Optional<Employees> getEmployees(Integer empNo);
+  void addOrModifyEmployees(List<Employees> employees);
 
-  void addEmployees(Employees employees);
+  Optional<List<Employees>> getEmployeesAll(List<Long> empNoList);
 
-  Optional<Employees> modifyEmployees(Employees employees);
-
-  void removeEmployees(Employees employees);
+  void removeEmployees(Long empNo);
 }

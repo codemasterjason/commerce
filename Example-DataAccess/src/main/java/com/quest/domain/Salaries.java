@@ -7,39 +7,36 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 /**
  * @author Jason Park
- * @since v1.0.0
+ * @since v
  */
 @Entity
 @IdClass(SalariesPK.class)
 public class Salaries {
-  private int empNo;
-  private int salary;
+  private Long empNo;
+  private Integer salary;
   private Date fromDate;
   private Date toDate;
-  private Employees employeesByEmpNo;
 
   @Id
   @Column(name = "emp_no", nullable = false)
-  public int getEmpNo() {
+  public Long getEmpNo() {
     return empNo;
   }
 
-  public void setEmpNo(int empNo) {
+  public void setEmpNo(Long empNo) {
     this.empNo = empNo;
   }
 
   @Basic
   @Column(name = "salary", nullable = false)
-  public int getSalary() {
+  public Integer getSalary() {
     return salary;
   }
 
-  public void setSalary(int salary) {
+  public void setSalary(Integer salary) {
     this.salary = salary;
   }
 
@@ -70,8 +67,8 @@ public class Salaries {
 
     Salaries salaries = (Salaries) o;
 
-    if (empNo != salaries.empNo) return false;
-    if (salary != salaries.salary) return false;
+    if (empNo != null ? !empNo.equals(salaries.empNo) : salaries.empNo != null) return false;
+    if (salary != null ? !salary.equals(salaries.salary) : salaries.salary != null) return false;
     if (fromDate != null ? !fromDate.equals(salaries.fromDate) : salaries.fromDate != null)
       return false;
     if (toDate != null ? !toDate.equals(salaries.toDate) : salaries.toDate != null) return false;
@@ -81,20 +78,10 @@ public class Salaries {
 
   @Override
   public int hashCode() {
-    int result = empNo;
-    result = 31 * result + salary;
+    int result = empNo != null ? empNo.hashCode() : 0;
+    result = 31 * result + (salary != null ? salary.hashCode() : 0);
     result = 31 * result + (fromDate != null ? fromDate.hashCode() : 0);
     result = 31 * result + (toDate != null ? toDate.hashCode() : 0);
     return result;
-  }
-
-  @ManyToOne
-  @JoinColumn(name = "emp_no", referencedColumnName = "emp_no", nullable = false, insertable = false, updatable = false)
-  public Employees getEmployeesByEmpNo() {
-    return employeesByEmpNo;
-  }
-
-  public void setEmployeesByEmpNo(Employees employeesByEmpNo) {
-    this.employeesByEmpNo = employeesByEmpNo;
   }
 }

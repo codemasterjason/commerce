@@ -1,23 +1,18 @@
 package com.quest.domain;
 
-import java.util.Collection;
-
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 /**
  * @author Jason Park
- * @since v1.0.0
+ * @since v
  */
 @Entity
 public class Departments {
   private String deptNo;
   private String deptName;
-  private Collection<DeptEmp> deptEmpsByDeptNo;
-  private Collection<DeptManager> deptManagersByDeptNo;
 
   @Id
   @Column(name = "dept_no", nullable = false, length = 4)
@@ -57,23 +52,5 @@ public class Departments {
     int result = deptNo != null ? deptNo.hashCode() : 0;
     result = 31 * result + (deptName != null ? deptName.hashCode() : 0);
     return result;
-  }
-
-  @OneToMany(mappedBy = "departmentsByDeptNo")
-  public Collection<DeptEmp> getDeptEmpsByDeptNo() {
-    return deptEmpsByDeptNo;
-  }
-
-  public void setDeptEmpsByDeptNo(Collection<DeptEmp> deptEmpsByDeptNo) {
-    this.deptEmpsByDeptNo = deptEmpsByDeptNo;
-  }
-
-  @OneToMany(mappedBy = "departmentsByDeptNo")
-  public Collection<DeptManager> getDeptManagersByDeptNo() {
-    return deptManagersByDeptNo;
-  }
-
-  public void setDeptManagersByDeptNo(Collection<DeptManager> deptManagersByDeptNo) {
-    this.deptManagersByDeptNo = deptManagersByDeptNo;
   }
 }

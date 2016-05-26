@@ -1,38 +1,32 @@
 package com.quest.domain;
 
 import java.sql.Date;
-import java.util.Collection;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 /**
  * @author Jason Park
- * @since v1.0.0
+ * @since v
  */
 @Entity
 public class Employees {
-  private int empNo;
+  private Long empNo;
   private Date birthDate;
   private String firstName;
   private String lastName;
   private String gender;
   private Date hireDate;
-  private Collection<DeptEmp> deptEmpsByEmpNo;
-  private Collection<DeptManager> deptManagersByEmpNo;
-  private Collection<Salaries> salariesByEmpNo;
-  private Collection<Titles> titlesByEmpNo;
 
   @Id
   @Column(name = "emp_no", nullable = false)
-  public int getEmpNo() {
+  public Long getEmpNo() {
     return empNo;
   }
 
-  public void setEmpNo(int empNo) {
+  public void setEmpNo(Long empNo) {
     this.empNo = empNo;
   }
 
@@ -93,7 +87,7 @@ public class Employees {
 
     Employees employees = (Employees) o;
 
-    if (empNo != employees.empNo) return false;
+    if (empNo != null ? !empNo.equals(employees.empNo) : employees.empNo != null) return false;
     if (birthDate != null ? !birthDate.equals(employees.birthDate) : employees.birthDate != null)
       return false;
     if (firstName != null ? !firstName.equals(employees.firstName) : employees.firstName != null)
@@ -109,48 +103,12 @@ public class Employees {
 
   @Override
   public int hashCode() {
-    int result = empNo;
+    int result = empNo != null ? empNo.hashCode() : 0;
     result = 31 * result + (birthDate != null ? birthDate.hashCode() : 0);
     result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
     result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
     result = 31 * result + (gender != null ? gender.hashCode() : 0);
     result = 31 * result + (hireDate != null ? hireDate.hashCode() : 0);
     return result;
-  }
-
-  @OneToMany(mappedBy = "employeesByEmpNo")
-  public Collection<DeptEmp> getDeptEmpsByEmpNo() {
-    return deptEmpsByEmpNo;
-  }
-
-  public void setDeptEmpsByEmpNo(Collection<DeptEmp> deptEmpsByEmpNo) {
-    this.deptEmpsByEmpNo = deptEmpsByEmpNo;
-  }
-
-  @OneToMany(mappedBy = "employeesByEmpNo")
-  public Collection<DeptManager> getDeptManagersByEmpNo() {
-    return deptManagersByEmpNo;
-  }
-
-  public void setDeptManagersByEmpNo(Collection<DeptManager> deptManagersByEmpNo) {
-    this.deptManagersByEmpNo = deptManagersByEmpNo;
-  }
-
-  @OneToMany(mappedBy = "employeesByEmpNo")
-  public Collection<Salaries> getSalariesByEmpNo() {
-    return salariesByEmpNo;
-  }
-
-  public void setSalariesByEmpNo(Collection<Salaries> salariesByEmpNo) {
-    this.salariesByEmpNo = salariesByEmpNo;
-  }
-
-  @OneToMany(mappedBy = "employeesByEmpNo")
-  public Collection<Titles> getTitlesByEmpNo() {
-    return titlesByEmpNo;
-  }
-
-  public void setTitlesByEmpNo(Collection<Titles> titlesByEmpNo) {
-    this.titlesByEmpNo = titlesByEmpNo;
   }
 }

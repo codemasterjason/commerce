@@ -1,12 +1,12 @@
 package com.quest.service;
 
-import com.quest.dao.EmployeesDao;
 import com.quest.domain.Employees;
-import com.quest.model.RowBounds;
+import com.quest.repository.EmployeesRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,34 +16,29 @@ import java.util.Optional;
  * @since v1.0.0
  */
 @Service
-@Transactional
 public class EmployeesServiceImpl implements EmployeesService {
 
   @Autowired
-  EmployeesDao employeesDao;
+  EmployeesRepository employeesRepository;
 
   @Override
-  public Optional<List<Employees>> getEmployees(RowBounds rowBounds) {
-    return employeesDao.findEmployees(rowBounds);
+  public Optional<Page<Employees>> getEmployees(Pageable pageable) {
+    return Optional.ofNullable(employeesRepository.findAll(pageable));
   }
 
   @Override
-  public Optional<Employees> getEmployees(Integer empNo) {
-    return employeesDao.findEmployeesByEmpNo(empNo);
+  public void addOrModifyEmployees(List<Employees> employees) {
+    employeesRepository.save(employees);
   }
 
   @Override
-  public void addEmployees(Employees employees) {
-    employeesDao.save(employees);
+  public Optional<List<Employees>> getEmployeesAll(List<Long> empNoList) {
+    Optional<List<Employees>> employees = Optional.ofNullable(employeesRepository.findAll(empNoList));
+    return employees;
   }
 
   @Override
-  public Optional<Employees> modifyEmployees(Employees employees) {
-    return employeesDao.merge(employees);
-  }
-
-  @Override
-  public void removeEmployees(Employees employees) {
-    employeesDao.delete(employees);
+  public void removeEmployees(Long empNo) {
+    employeesRepository.delete(empNo);
   }
 }

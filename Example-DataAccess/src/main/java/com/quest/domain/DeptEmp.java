@@ -13,26 +13,25 @@ import javax.persistence.Table;
 
 /**
  * @author Jason Park
- * @since v1.0.0
+ * @since v
  */
 @Entity
 @Table(name = "dept_emp", schema = "employees", catalog = "")
 @IdClass(DeptEmpPK.class)
 public class DeptEmp {
-  private int empNo;
+  private Long empNo;
   private String deptNo;
   private Date fromDate;
   private Date toDate;
-  private Employees employeesByEmpNo;
   private Departments departmentsByDeptNo;
 
   @Id
   @Column(name = "emp_no", nullable = false)
-  public int getEmpNo() {
+  public Long getEmpNo() {
     return empNo;
   }
 
-  public void setEmpNo(int empNo) {
+  public void setEmpNo(Long empNo) {
     this.empNo = empNo;
   }
 
@@ -73,7 +72,7 @@ public class DeptEmp {
 
     DeptEmp deptEmp = (DeptEmp) o;
 
-    if (empNo != deptEmp.empNo) return false;
+    if (empNo != null ? !empNo.equals(deptEmp.empNo) : deptEmp.empNo != null) return false;
     if (deptNo != null ? !deptNo.equals(deptEmp.deptNo) : deptEmp.deptNo != null) return false;
     if (fromDate != null ? !fromDate.equals(deptEmp.fromDate) : deptEmp.fromDate != null)
       return false;
@@ -84,21 +83,11 @@ public class DeptEmp {
 
   @Override
   public int hashCode() {
-    int result = empNo;
+    int result = empNo != null ? empNo.hashCode() : 0;
     result = 31 * result + (deptNo != null ? deptNo.hashCode() : 0);
     result = 31 * result + (fromDate != null ? fromDate.hashCode() : 0);
     result = 31 * result + (toDate != null ? toDate.hashCode() : 0);
     return result;
-  }
-
-  @ManyToOne
-  @JoinColumn(name = "emp_no", referencedColumnName = "emp_no", nullable = false, insertable = false, updatable = false)
-  public Employees getEmployeesByEmpNo() {
-    return employeesByEmpNo;
-  }
-
-  public void setEmployeesByEmpNo(Employees employeesByEmpNo) {
-    this.employeesByEmpNo = employeesByEmpNo;
   }
 
   @ManyToOne
