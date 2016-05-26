@@ -1,10 +1,11 @@
 package com.lifeisquest.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,6 +37,7 @@ public @Data class Product implements Serializable {
 
   @NotNull
   @JsonBackReference
+  @JsonView
   @Column(name="description")
   private String description;
 

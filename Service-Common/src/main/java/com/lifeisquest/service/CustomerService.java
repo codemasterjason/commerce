@@ -8,6 +8,7 @@ import com.lifeisquest.repository.StoreRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,6 +22,7 @@ import java.util.Map;
  */
 
 @Service
+@Transactional
 public class CustomerService {
   @Autowired
   CustomerRepository customerRepo;
@@ -30,7 +32,16 @@ public class CustomerService {
       customerRepo.save(customer);
     }
   }
+  public Customer findByEmail(String email){
 
+    List<Customer> customers = customerRepo.findAll();
+    for(Customer customer : customers){
+      if(customer.getEmail().equals(email)){
+        return customer;
+      }
+    }
+    return null;
+  }
 
   public void save(Customer customer) {
     customerRepo.save(customer);
@@ -38,5 +49,10 @@ public class CustomerService {
   }
   public List<Customer> findAll(){
     return customerRepo.findAll();
+  }
+
+  public Customer findOne(long id) {
+
+    return customerRepo.findOne(id);
   }
 }

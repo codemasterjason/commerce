@@ -1,5 +1,6 @@
 package com.lifeisquest.domain;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
@@ -25,8 +27,9 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name="order")
-public class Order {
-
+public class Order implements Serializable {
+  @Transient
+  private static final long serialVersionUID = 1L;
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name ="ID")
@@ -51,6 +54,7 @@ public class Order {
   @NotNull
   @Column(name="updated_at")
   private Date updateTime;
+
 
   @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
   @JoinColumn(name = "store_id")

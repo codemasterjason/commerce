@@ -2,6 +2,7 @@ package com.lifeisquest.domain;
 
 import org.hibernate.usertype.CompositeUserType;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -23,7 +24,8 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name="customer")
-public class Customer {
+public class Customer implements Serializable {
+  private static final long serialVersionUID = 1L;
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name ="ID")

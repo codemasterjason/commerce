@@ -1,16 +1,25 @@
 package com.lifeisquest.service;
 
-import com.lifeisquest.domain.Product;
+
+
+import com.lifeisquest.domain.QStore;
 import com.lifeisquest.domain.Store;
 import com.lifeisquest.repository.StoreRepository;
+import com.mysema.query.SearchResults;
+import com.mysema.query.jpa.impl.JPAQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.support.QueryDslRepositorySupport;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  * @version : 1.0
@@ -19,9 +28,38 @@ import java.util.Map;
  */
 
 @Service
-public class StoreService {
+@Transactional
+public class StoreService extends QueryDslRepositorySupport {
   @Autowired
-  StoreRepository storeRepo;
+  private StoreRepository storeRepo;
+
+  @PersistenceContext
+  private EntityManager entityManager;
+
+  /*
+   find one product each productId
+   */
+  public Map findOneByProductId(long productId) {
+    Map data = new HashMap<String, Object>();
+    QStore astore = QStore.store;
+    JPAQuery query = new JPAQuery(entityManager);
+
+
+    SearchResults<Store> storeSearchResults = query.from(astore).where(astore.product.id.eq(productId)).listResults(astore);
+
+    for(Store item : storeSearchResults.getResults()) {
+        data.put("id", item.getProduct().getId());
+        data.put("name", item.getProduct().getName());
+        data.put("description", item.getProduct().getDescription());
+        data.put("price", item.getProduct().getPrice());
+        data.put("discount", item.getDisCount());
+        return data;
+    }
+    return data;
+  }
+  public StoreService() {
+    super(Store.class);
+  }
 
   /*
    save 1 item
@@ -39,32 +77,16 @@ public class StoreService {
     storeRepo.save(store);
   }
 
-  /*
-   find one product each productId
-   */
-  public List<Map> findOne(long productId){
+  public Store findOne(long storeId) {
 
-    List<Store> storeList = storeRepo.findAll();
-    List<Map> dataList = new ArrayList<Map>();
-
-    for(Store item : storeList) {
-      if(item.getProduct().getId()==productId) {
-        Map data = new HashMap<String, Object>();
-        data.put("id", item.getProduct().getId());
-        data.put("name", item.getProduct().getName());
-        data.put("description", item.getProduct().getDescription());
-        data.put("price", item.getProduct().getPrice());
-        data.put("discount", item.getDisCount());
-        dataList.add(data);
-        break;
-      }
-    }
-
-    return dataList;
+    return storeRepo.findOne(storeId);
   }
 
-  /*
 
+
+
+  /*
+    return get datalist(Count per)
    */
   public List<Map> getItemPerCount(Integer offset, Integer count) {
     List<Store> storeList = storeRepo.findAll();
