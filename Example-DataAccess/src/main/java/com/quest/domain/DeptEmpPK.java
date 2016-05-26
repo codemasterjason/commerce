@@ -7,19 +7,19 @@ import javax.persistence.Id;
 
 /**
  * @author Jason Park
- * @since v1.0.0
+ * @since v
  */
 public class DeptEmpPK implements Serializable {
-  private int empNo;
+  private Long empNo;
   private String deptNo;
 
   @Column(name = "emp_no", nullable = false)
   @Id
-  public int getEmpNo() {
+  public Long getEmpNo() {
     return empNo;
   }
 
-  public void setEmpNo(int empNo) {
+  public void setEmpNo(Long empNo) {
     this.empNo = empNo;
   }
 
@@ -40,7 +40,7 @@ public class DeptEmpPK implements Serializable {
 
     DeptEmpPK deptEmpPK = (DeptEmpPK) o;
 
-    if (empNo != deptEmpPK.empNo) return false;
+    if (empNo != null ? !empNo.equals(deptEmpPK.empNo) : deptEmpPK.empNo != null) return false;
     if (deptNo != null ? !deptNo.equals(deptEmpPK.deptNo) : deptEmpPK.deptNo != null) return false;
 
     return true;
@@ -48,7 +48,7 @@ public class DeptEmpPK implements Serializable {
 
   @Override
   public int hashCode() {
-    int result = empNo;
+    int result = empNo != null ? empNo.hashCode() : 0;
     result = 31 * result + (deptNo != null ? deptNo.hashCode() : 0);
     return result;
   }

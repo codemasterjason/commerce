@@ -12,12 +12,12 @@ import javax.persistence.ManyToOne;
 
 /**
  * @author Jason Park
- * @since v1.0.0
+ * @since v
  */
 @Entity
 @IdClass(TitlesPK.class)
 public class Titles {
-  private int empNo;
+  private Long empNo;
   private String title;
   private Date fromDate;
   private Date toDate;
@@ -25,11 +25,11 @@ public class Titles {
 
   @Id
   @Column(name = "emp_no", nullable = false)
-  public int getEmpNo() {
+  public Long getEmpNo() {
     return empNo;
   }
 
-  public void setEmpNo(int empNo) {
+  public void setEmpNo(Long empNo) {
     this.empNo = empNo;
   }
 
@@ -70,7 +70,7 @@ public class Titles {
 
     Titles titles = (Titles) o;
 
-    if (empNo != titles.empNo) return false;
+    if (empNo != null ? !empNo.equals(titles.empNo) : titles.empNo != null) return false;
     if (title != null ? !title.equals(titles.title) : titles.title != null) return false;
     if (fromDate != null ? !fromDate.equals(titles.fromDate) : titles.fromDate != null)
       return false;
@@ -81,7 +81,7 @@ public class Titles {
 
   @Override
   public int hashCode() {
-    int result = empNo;
+    int result = empNo != null ? empNo.hashCode() : 0;
     result = 31 * result + (title != null ? title.hashCode() : 0);
     result = 31 * result + (fromDate != null ? fromDate.hashCode() : 0);
     result = 31 * result + (toDate != null ? toDate.hashCode() : 0);

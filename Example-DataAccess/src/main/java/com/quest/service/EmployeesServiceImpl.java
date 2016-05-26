@@ -27,7 +27,18 @@ public class EmployeesServiceImpl implements EmployeesService {
   }
 
   @Override
-  public void addEmployees(List<Employees> employees) {
+  public void addOrModifyEmployees(List<Employees> employees) {
     employeesRepository.save(employees);
+  }
+
+  @Override
+  public Optional<List<Employees>> getEmployeesAll(List<Long> empNoList) {
+    Optional<List<Employees>> employees = Optional.ofNullable(employeesRepository.findAll(empNoList));
+    return employees;
+  }
+
+  @Override
+  public void removeEmployees(Long empNo) {
+    employeesRepository.delete(empNo);
   }
 }

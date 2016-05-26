@@ -16,5 +16,9 @@ public interface EmployeesService {
 
   Optional<Page<Employees>> getEmployees(Pageable pageable);
 
-  void addEmployees(List<Employees> employees);
+  void addOrModifyEmployees(List<Employees> employees);
+
+  Optional<List<Employees>> getEmployeesAll(List<Long> empNoList);
+
+  void removeEmployees(Long empNo);
 }

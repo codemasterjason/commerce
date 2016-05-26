@@ -9,9 +9,9 @@ import com.quest.model.RowBounds;
 import com.quest.service.EmployeesRawService;
 import com.quest.util.MessageCode;
 import com.quest.util.ResponseFactory;
-import com.quest.util.ResponseObj;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,7 +41,7 @@ public class EmployeesRawController {
    * @return ResponseObj
    */
   @Get("")
-  public ResponseObj getEmployees(@Valid RowBounds rowBounds) {
+  public ResponseEntity getEmployees(@Valid RowBounds rowBounds) {
     Optional<List<Employees>> employees = employeesRawService.getEmployees(rowBounds);
     if (!employees.isPresent()) {
       return responseFactory.get(MessageCode.DAO_FAIL);
@@ -50,7 +50,7 @@ public class EmployeesRawController {
   }
 
   @Get("/{empNo}")
-  public ResponseObj getEmployees(@PathVariable Integer empNo) {
+  public ResponseEntity getEmployees(@PathVariable Integer empNo) {
     Optional<Employees> employees = employeesRawService.getEmployees(empNo);
     if (!employees.isPresent()) {
       return responseFactory.get(MessageCode.DAO_FAIL);
@@ -59,13 +59,13 @@ public class EmployeesRawController {
   }
 
   @Post("")
-  public ResponseObj addEmployees(@Valid Employees employees) {
+  public ResponseEntity addEmployees(@Valid Employees employees) {
     employeesRawService.addEmployees(employees);
     return responseFactory.get(MessageCode.SUCCESS);
   }
 
   @Put("")
-  public ResponseObj modifyEmployees(@Valid Employees employees) {
+  public ResponseEntity modifyEmployees(@Valid Employees employees) {
     Optional<Employees> employeesReturn = employeesRawService.modifyEmployees(employees);
     if (!employeesReturn.isPresent()) {
       return responseFactory.get(MessageCode.DAO_FAIL);
@@ -74,7 +74,7 @@ public class EmployeesRawController {
   }
 
   @Delete("/{empNo}")
-  public ResponseObj deleteEmployees(@PathVariable Integer empNo) {
+  public ResponseEntity deleteEmployees(@PathVariable Integer empNo) {
     Optional<Employees> employees = employeesRawService.getEmployees(empNo);
     if (!employees.isPresent()) {
       return responseFactory.get(MessageCode.DAO_FAIL);

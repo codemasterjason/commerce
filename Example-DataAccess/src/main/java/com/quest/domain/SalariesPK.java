@@ -8,19 +8,19 @@ import javax.persistence.Id;
 
 /**
  * @author Jason Park
- * @since v1.0.0
+ * @since v
  */
 public class SalariesPK implements Serializable {
-  private int empNo;
+  private Long empNo;
   private Date fromDate;
 
   @Column(name = "emp_no", nullable = false)
   @Id
-  public int getEmpNo() {
+  public Long getEmpNo() {
     return empNo;
   }
 
-  public void setEmpNo(int empNo) {
+  public void setEmpNo(Long empNo) {
     this.empNo = empNo;
   }
 
@@ -41,7 +41,7 @@ public class SalariesPK implements Serializable {
 
     SalariesPK that = (SalariesPK) o;
 
-    if (empNo != that.empNo) return false;
+    if (empNo != null ? !empNo.equals(that.empNo) : that.empNo != null) return false;
     if (fromDate != null ? !fromDate.equals(that.fromDate) : that.fromDate != null) return false;
 
     return true;
@@ -49,7 +49,7 @@ public class SalariesPK implements Serializable {
 
   @Override
   public int hashCode() {
-    int result = empNo;
+    int result = empNo != null ? empNo.hashCode() : 0;
     result = 31 * result + (fromDate != null ? fromDate.hashCode() : 0);
     return result;
   }

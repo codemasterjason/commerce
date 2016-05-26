@@ -1,5 +1,7 @@
 package com.quest.util;
 
+import org.springframework.http.ResponseEntity;
+
 import java.io.Serializable;
 
 /**
