@@ -1,5 +1,7 @@
 package com.lifeisquest.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
@@ -26,14 +28,22 @@ import lombok.Data;
  */
 @Entity
 @Data
-@Table(name="order")
+@Table(name = "[order]")
 public class Order implements Serializable {
   @Transient
   private static final long serialVersionUID = 1L;
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name ="ID")
+  @Column(name ="id")
   private long id;
+  /*
+  @NotNull
+  @Column(name="store_id")
+  private long store_id;
+
+  @NotNull
+  @Column(name="customer_id")
+  private long customer_id;*/
 
   @NotNull
   @Column(name ="quantity")
@@ -56,17 +66,17 @@ public class Order implements Serializable {
   private Date updateTime;
 
 
-  @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
+  @ManyToOne(cascade= CascadeType.ALL,fetch= FetchType.EAGER)
   @JoinColumn(name = "store_id")
   private Store store;
 
-  @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
+  @ManyToOne(cascade= CascadeType.ALL,fetch= FetchType.EAGER)
   @JoinColumn(name = "customer_id")
   private Customer customer;
-
   public Order(){
 
   }
+
   public Order(int quantity,String cancel, String hide, Store store, Customer customer){
     this.quantity = quantity;
     this.cancel = cancel;
@@ -76,5 +86,14 @@ public class Order implements Serializable {
     this.createTime = Calendar.getInstance().getTime();
     this.updateTime = Calendar.getInstance().getTime();
   }
+  /*public Order(int quantity,String cancel, String hide, long store_id, long customer_id){
+    this.quantity = quantity;
+    this.cancel = cancel;
+    this.hide = hide;
+    this.store_id = store_id;
+    this.customer_id = customer_id;
+    this.createTime = Calendar.getInstance().getTime();
+    this.updateTime = Calendar.getInstance().getTime();
+  }*/
 
 }

@@ -57,7 +57,7 @@ public class Store implements Serializable {
   @Column(name="updated_at")
   private Date updateTime;
 
-  @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.LAZY)
+  @ManyToOne(cascade= CascadeType.ALL, fetch= FetchType.EAGER)
   @JoinColumn(name = "product_id")
   private Product product;
 

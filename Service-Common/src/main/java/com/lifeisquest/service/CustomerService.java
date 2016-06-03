@@ -6,8 +6,10 @@ import com.lifeisquest.domain.Store;
 import com.lifeisquest.repository.CustomerRepository;
 import com.lifeisquest.repository.StoreRepository;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -22,16 +24,12 @@ import java.util.Map;
  */
 
 @Service
-@Transactional
 public class CustomerService {
+  private static final org.slf4j.Logger logger = LoggerFactory.getLogger(CustomerService.class);
   @Autowired
   CustomerRepository customerRepo;
 
-  public void save(List<Customer> customers){
-    for(Customer customer : customers){
-      customerRepo.save(customer);
-    }
-  }
+
   public Customer findByEmail(String email){
 
     List<Customer> customers = customerRepo.findAll();
@@ -42,9 +40,17 @@ public class CustomerService {
     }
     return null;
   }
-
-  public void save(Customer customer) {
-    customerRepo.save(customer);
+  @Transactional(propagation= Propagation.REQUIRED, rollbackFor=Exception.class)
+  public boolean save(Customer customer) {
+    //if(customerRepo.exists(customer.getEmail())) return false;
+    try {
+      customerRepo.save(customer);
+    }
+    catch(Exception e){
+      logger.error("Customer Save Fail : "+e.toString());
+      throw e;
+    }
+    return true;
 
   }
   public List<Customer> findAll(){

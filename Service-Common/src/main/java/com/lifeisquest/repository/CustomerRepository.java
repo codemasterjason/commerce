@@ -14,4 +14,6 @@ import org.springframework.data.repository.query.Param;
  */
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
+  //boolean exists( String email);
+
 }

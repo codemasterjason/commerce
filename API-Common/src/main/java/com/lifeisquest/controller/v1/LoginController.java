@@ -1,5 +1,7 @@
 package com.lifeisquest.controller.v1;
 
+import com.lifeisquest.annotation.Get;
+import com.lifeisquest.annotation.Post;
 import com.lifeisquest.domain.Customer;
 import com.lifeisquest.service.CustomerService;
 import com.lifeisquest.service.OrderService;
@@ -32,7 +34,7 @@ public class LoginController {
   OrderService orderService;
 
 
-  @RequestMapping(value = "/login", method = RequestMethod.GET)
+  @Get(value = "/login")
   public ResponseObj checkLoginInfo(@RequestParam(value = "email") String email,
                                      @RequestParam(value = "password") String password) {
     Customer customer = customerService.findByEmail(email);
@@ -44,11 +46,10 @@ public class LoginController {
     else{
       return new ResponseObj(MessageCode.FAIL,"Please insert correct password.");
     }
-
-
   }
 
-  @RequestMapping(value = "/signup", method = RequestMethod.GET)
+
+  @Post(value = "/signup")
   public ResponseObj addUser(@RequestParam(value = "nameFirst", defaultValue = "0") String nameFirset,
                              @RequestParam(value = "nameLast", defaultValue = "0") String nameLast,
                              @RequestParam(value = "email") String email,
@@ -61,13 +62,13 @@ public class LoginController {
 
   }
 
-  @RequestMapping(value = "/list", method = RequestMethod.GET)
+  @Get(value = "/list")
   public ResponseObj userList() {
 
     return new ResponseObj(MessageCode.SUCCESS,customerService.findAll());
   }
 
-  @RequestMapping(value = "/profile", method = RequestMethod.GET)
+  @Get(value = "/profile")
   public ResponseObj getProfileInfo(@RequestParam(value = "email") String email) {
 
     return new ResponseObj(MessageCode.SUCCESS,orderService.findOrderedItemByEmail(email));

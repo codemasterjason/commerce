@@ -1,6 +1,7 @@
 package com.lifeisquest.controller.v1;
 
 import com.lifeisquest.annotation.Get;
+import com.lifeisquest.annotation.Post;
 import com.lifeisquest.aspect.GlobalExceptionLoggingHandler;
 import com.lifeisquest.domain.Product;
 import com.lifeisquest.domain.Store;
@@ -60,7 +61,7 @@ public class ProductController {
     return new ResponseObj(MessageCode.SUCCESS,storeService.findOneByProductId(productId));
   }
 
-  @RequestMapping(value = "/addstore", method = RequestMethod.GET)
+  @Post(value = "/addstore")
   public ResponseObj addStoreItem(@RequestParam(value = "productId", defaultValue = "0") Long productId,
                               @RequestParam(value = "quantity", defaultValue = "0") int quantity,
                               @RequestParam(value = "discount", defaultValue = "0") int discount,
@@ -76,7 +77,7 @@ public class ProductController {
     return new ResponseObj(MessageCode.SUCCESS,store);
   }
 
-  /*@RequestMapping(value = "/add", method = RequestMethod.GET)
+  @Post(value = "/addProduct")
   public ResponseObj addProduct(@RequestParam(value = "name", defaultValue = "Init") String name,
                                 @RequestParam(value = "price", defaultValue = "0") Integer price,
                                 @RequestParam(value = "description", defaultValue = "No Description") String description,
@@ -89,6 +90,6 @@ public class ProductController {
     logger.info("hide = "+ hide);
 
     return new ResponseObj(MessageCode.SUCCESS,product);
-  }*/
+  }
 
 }

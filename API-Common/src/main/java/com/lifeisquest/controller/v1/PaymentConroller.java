@@ -53,8 +53,8 @@ public class PaymentConroller {
     Customer customer = customerService.findOne(customerId);
     logger.info("customerId = "+ customerId);
     //Hide and cancel is "Y" because customer buy product
-    Order order = new Order(quantity,"N", "N", store, customer);
-    orderService.save(order);
+    //Order order = new Order(quantity,"N", "N", store, customer);
+    //orderService.save(order);
     return new ResponseObj(MessageCode.SUCCESS,"ok");
   }
   @RequestMapping(value = "/list", method = RequestMethod.GET)
